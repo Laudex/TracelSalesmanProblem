@@ -21,27 +21,27 @@ public class RouteServices {
         int size = customers.size();
         if (size > 0) {
             Customer first = customers.get(0);
-            distance = countDistanceAndServiceTime(depot, first);
+            distance = countDistanceAndServiceTime(depot, first, distance);
         }
         for (int i = 0; i < size; i++) {
             if (i + 1 < size) {
                 Customer first = customers.get(i);
                 Customer second = customers.get(i + 1);
-                distance = distance + countDistanceAndServiceTime(first, second);
+                distance = countDistanceAndServiceTime(first, second, distance);
 
             }
         }
         Customer last = customers.get(size - 1);
-        distance = distance + countDistanceAndServiceTime(last, depot);
+        distance = countDistanceAndServiceTime(last, depot, distance);
         return distance;
     }
 
-    public static double countDistanceAndServiceTime(Customer first, Customer second) {
+    public static double countDistanceAndServiceTime(Customer first, Customer second, double currentDistance) {
         double distance = first.getMappedDistances().get(second.getCustomerId());
-        if (distance < second.getStartTime()) {
+        if (distance + currentDistance < second.getStartTime()) {
             distance = second.getStartTime() + second.getServiceTime();
-        } else if (distance >= second.getStartTime() && distance <= second.getFinishTime()) {
-            distance = distance + second.getServiceTime();
+        } else if (distance + currentDistance >= second.getStartTime() && currentDistance + distance <= second.getFinishTime()) {
+            distance = currentDistance + distance + second.getServiceTime();
         }
         return distance;
     }

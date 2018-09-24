@@ -45,12 +45,7 @@ public class Main {
 
         CustomerServices.calculateDistances(customers);
 
-        for (Customer customer : customers) {
-            System.out.println("Cusomer Id = " + customer.getCustomerId());
-            Map<Integer, Double> distances = customer.getMappedDistances();
 
-            System.out.println(distances.toString());
-        }
 
         //Find start solution:
 
@@ -58,10 +53,14 @@ public class Main {
 
         int routeId = 1;
         for (Car car : cars) {
+            int count = 0;
             Route newRoute = new Route(routeId, car, 0);
             Map<Customer, Double> customersAndStartServiceTime = new LinkedHashMap<>();
             ArrayList<Customer> listOfCustomers = new ArrayList<>();
             for (Customer customer : customers) {
+                if(count > 4){
+                    break;
+                }
                 if (customer.getCustomerId() == 0) {
                     continue;
                 } else if (customer.isServed()) {
@@ -72,6 +71,7 @@ public class Main {
                     listOfCustomers.add(customer);
                     CarServices.moveToCustomer(car, customer);
                     customer.setServed(true);
+                    count++;
 
                 } else {
                     continue;
@@ -83,7 +83,8 @@ public class Main {
             newRoute.setFinishDepot(car.getDistance());
             routes.add(newRoute);
             if (CustomerServices.allCustomersAreServed(customers)) {
-                printRoutes(routes);
+                System.out.println("HERE!!!");
+                //printRoutes(routes);
                 break;
             }
             routeId++;
@@ -91,11 +92,25 @@ public class Main {
         }
 
         double distance = RouteServices.totalDistance(routes, depot);
-        System.out.println("Distance of first solution: " + distance);
+        double sum = 0;
+        int size = 0;
+
+        for (Route route : routes) {
+            size = size + route.getListOfCustomers().size();
+        }
+
+       // System.out.println("Distance of first solution: " + distance);
 
         LocalSearchAction.execute(routes, depot);
         printRoutes(routes);
-        System.out.println("Best Distance : " + LocalSearchAction.getBestDistance());
+        for (Route route : routes) {
+            sum = sum + route.getFinishDepot();
+        }
+
+        System.out.println("Distance of first solution: " + distance);
+        System.out.println("sum: "  + sum);
+        System.out.println("Best Distance : " + RouteServices.totalDistance(routes, depot));
+
 
 
 
@@ -103,7 +118,6 @@ public class Main {
     }
 
     public static void printRoutes(ArrayList<Route> routes) {
-       // System.out.println("kek " + routes.size());
         System.out.println("Size: " + routes.size());
         for (Route route : routes) {
             Iterator it = route.getCustomersAndStartServiceTime().entrySet().iterator();

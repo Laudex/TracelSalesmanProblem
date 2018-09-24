@@ -38,30 +38,30 @@ public class CarServices {
     }
     public static boolean isMoveAcceptable(Car car, Customer customer, Customer depot){
         if (customer.getDemand() > car.getCapacity()){
-            System.out.println("Error: Car doesn't have enough goods for customer!");
+           // System.out.println("Error: Car doesn't have enough goods for customer!");
             return false;
         }
-        double distance = car.getCurrentState().getMappedDistances().get(customer.getCustomerId());
-        if (car.getDistance() + distance >= customer.getStartTime() && car.getDistance() + distance <= customer.getFinishTime()){
-            double timeToDepot = car.getDistance() + distance + customer.getServiceTime() + customer.getMappedDistances().get(depot.getCustomerId());
+        double distance = car.getDistance() + car.getCurrentState().getMappedDistances().get(customer.getCustomerId());
+        if (distance >= customer.getStartTime() && distance <= customer.getFinishTime()){
+            double timeToDepot = distance + customer.getServiceTime() + customer.getMappedDistances().get(depot.getCustomerId());
             if (timeToDepot <= depot.getFinishTime()){
-                System.out.println("Good: there is enough time to return to depot!");
+            //    System.out.println("Good: there is enough time to return to depot!");
                 return true;
             } else {
-                System.out.println("Error: not enough time to return to depot!");
+              //  System.out.println("Error: not enough time to return to depot!");
                 return false;
             }
-        } else if (car.getDistance() + distance <= customer.getStartTime()){
+        } else if (distance <= customer.getStartTime()){
             double timeToDepot = customer.getStartTime() + customer.getServiceTime() + customer.getMappedDistances().get(depot.getCustomerId());
             if (timeToDepot <= depot.getFinishTime()){
-                System.out.println("Good: there is enough time to return to depot!");
+               // System.out.println("Good: there is enough time to return to depot!");
                 return true;
             } else {
-                System.out.println("Error: not enough time to return to depot!");
+              //  System.out.println("Error: not enough time to return to depot!");
                 return false;
             }
-        } else if (car.getDistance() + distance >= customer.getFinishTime()){
-            System.out.println("Error: car be late to unload");
+        } else if (distance >= customer.getFinishTime()){
+            //System.out.println("Error: car be late to unload");
             return false;
         }
         return true;

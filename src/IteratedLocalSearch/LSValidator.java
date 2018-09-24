@@ -21,7 +21,7 @@ public class LSValidator {
             return false;
         }
         if (!(validateCapacity(firstCustomers, firstCar) && validateCapacity(secondCustomers, secondCar))){
-            System.out.println("Not enough capacity!");
+           // System.out.println("Not enough capacity!");
             return false;
         }
         return true;
@@ -34,34 +34,34 @@ public class LSValidator {
         try {
             if (size > 0) {
                 Customer first = customers.get(0);
-                distance = countDistanceAndServiceTime(depot, first);
+                distance = countDistanceAndServiceTime(depot, first, distance);
             }
             for (int i = 0; i < size; i++) {
                 if (i + 1 < size) {
                     Customer first = customers.get(i);
                     Customer second = customers.get(i + 1);
-                    distance = distance + countDistanceAndServiceTime(first, second);
+                    distance = countDistanceAndServiceTime(first, second, distance);
 
                 }
             }
             Customer last = customers.get(size - 1);
-            distance = distance + countDistanceAndServiceTime(last, depot);
+            distance = countDistanceAndServiceTime(last, depot, distance);
             return distance;
         } catch (NotValidRouteException e){
-            System.out.println("This move is not valid because of time window");
+           // System.out.println("This move is not valid because of time window");
             return -1;
         }
 
     }
 
-    public static double countDistanceAndServiceTime(Customer first, Customer second) throws NotValidRouteException {
+    public static double countDistanceAndServiceTime(Customer first, Customer second, double currentDistance) throws NotValidRouteException {
         double distance = first.getMappedDistances().get(second.getCustomerId());
-        if (distance < second.getStartTime()){
+        if (distance + currentDistance < second.getStartTime()){
             distance = second.getStartTime() + second.getServiceTime();
-        } else if (distance >= second.getStartTime() && distance <= second.getFinishTime()){
-            distance = distance + second.getServiceTime();
-        } else if (distance >= second.getFinishTime()){
-            System.out.println("error, not valid");
+        } else if (distance + currentDistance >= second.getStartTime() && distance + currentDistance <= second.getFinishTime()){
+            distance = currentDistance + distance + second.getServiceTime();
+        } else if (distance + currentDistance >= second.getFinishTime()){
+            //System.out.println("error, not valid");
             throw new NotValidRouteException("This route is not valid!");
 
         }

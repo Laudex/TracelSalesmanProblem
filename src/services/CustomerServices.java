@@ -23,7 +23,7 @@ public class CustomerServices {
     public static boolean allCustomersAreServed(ArrayList<Customer> customers) {
         for (Customer customer : customers) {
             if (!customer.isServed()) {
-                System.out.println("Warn: not all customers are served yet!");
+               // System.out.println("Warn: not all customers are served yet!");
                 return false;
             }
         }
