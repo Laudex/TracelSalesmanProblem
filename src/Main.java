@@ -1,5 +1,6 @@
 import IteratedLocalSearch.LSValidator;
 import IteratedLocalSearch.LocalSearchAction;
+import IteratedLocalSearch.Perturbation;
 import entities.Car;
 import entities.Customer;
 import entities.Route;
@@ -18,7 +19,7 @@ public class Main {
 
         ArrayList<Customer> customers = new ArrayList<>();
         ArrayList<Car> cars = new ArrayList<>();
-       // cars.add(car1);
+        // cars.add(car1);
         //cars.add(car2);
 
         //Customer depot = new Customer(0, 0, 0, 0, 0, 500, 0, true);
@@ -26,25 +27,24 @@ public class Main {
         Customer customer3 = new Customer(2, 71, 27, 65, 154, 220, 50, false);
         Customer customer4 = new Customer(3, 23, 85, 34, 314, 367, 23, false);
 
-       // car1.setCurrentState(depot);
-       // car2.setCurrentState(depot);
+        // car1.setCurrentState(depot);
+        // car2.setCurrentState(depot);
 
 
-       // customers.add(depot);
-       // customers.add(customer2);
-       // customers.add(customer3);
-      //  customers.add(customer4);
+        // customers.add(depot);
+        // customers.add(customer2);
+        // customers.add(customer3);
+        //  customers.add(customer4);
         FileServices.readFromTxt("C:\\instances\\C108.txt");
         cars = FileServices.getCars();
         customers = FileServices.getCustomers();
         Customer depot = customers.get(0);
-        for (Car car: cars){
+        for (Car car : cars) {
             car.setCurrentState(depot);
         }
         LSValidator.setCapacity(cars.get(0).getCapacity());
 
         CustomerServices.calculateDistances(customers);
-
 
 
         //Find start solution:
@@ -58,9 +58,9 @@ public class Main {
             Map<Customer, Double> customersAndStartServiceTime = new LinkedHashMap<>();
             ArrayList<Customer> listOfCustomers = new ArrayList<>();
             for (Customer customer : customers) {
-                if(count > 4){
-                    break;
-                }
+               // if (count > 4) {
+                //    break;
+               // }
                 if (customer.getCustomerId() == 0) {
                     continue;
                 } else if (customer.isServed()) {
@@ -99,20 +99,37 @@ public class Main {
             size = size + route.getListOfCustomers().size();
         }
 
-       // System.out.println("Distance of first solution: " + distance);
+        // System.out.println("Distance of first solution: " + distance);
 
-        LocalSearchAction.execute(routes, depot);
-        printRoutes(routes);
+
+
+
+
         for (Route route : routes) {
             sum = sum + route.getFinishDepot();
         }
 
         System.out.println("Distance of first solution: " + distance);
-        System.out.println("sum: "  + sum);
+        System.out.println("sum: " + sum);
         System.out.println("Best Distance : " + RouteServices.totalDistance(routes, depot));
+        LocalSearchAction.execute(routes, depot);
+        double startDistance = RouteServices.totalDistance(routes, depot);
+        ArrayList<Route> startRoutes = new ArrayList<>(routes);
+        for (int i = 1; i<100;i++) {
+            Perturbation.execute(routes, depot);
+            LocalSearchAction.execute(routes, depot);
+            double newDistance = RouteServices.totalDistance(routes, depot);
+            if (newDistance > startDistance){
+                continue;
+            } else {
+                startRoutes = new ArrayList<>(routes);
+                System.out.println("KEK");
+                startDistance = newDistance;
 
-
-
+            }
+        }
+        printRoutes(startRoutes);
+        System.out.println("Best Distance : " + startDistance);
 
 
     }

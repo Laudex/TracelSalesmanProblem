@@ -17,6 +17,16 @@ public class LocalSearchAction {
     private static double bestDistance;
     private static double totalBestDistance = 0;
 
+    private static ArrayList<Customer> validCombination = new ArrayList<>();
+
+    public static ArrayList<Customer> getValidCombination() {
+        return validCombination;
+    }
+
+    public static void setValidCombination(ArrayList<Customer> validCombination) {
+        LocalSearchAction.validCombination = validCombination;
+    }
+
     public static double getBestDistance() {
         return bestDistance;
     }
@@ -27,14 +37,53 @@ public class LocalSearchAction {
             for (Route secondRoute : routes) {
                 if (firstRoute.getId() != secondRoute.getId()) {
                     makeSwapByOne(firstRoute, secondRoute);
-                    if (firstRoute.getListOfCustomers().size() > 0 && secondRoute.getListOfCustomers().size() > 0) {
+                    /*if (firstRoute.getListOfCustomers().size() > 0 && secondRoute.getListOfCustomers().size() > 0) {
                         makeSwapByTwo(firstRoute, secondRoute);
                     }
+                    */
                 }
 
             }
         }
+        for(Route route : routes){
+            double distance = RouteServices.countDistance(route.getListOfCustomers(), depot);
+            if(recombination(route.getListOfCustomers(), distance)){
+                route.setListOfCustomers(getValidCombination());
+                route.getCar().setDistance(RouteServices.countDistance(route.getListOfCustomers(), depot));
+                route.setFinishDepot(route.getCar().getDistance());
+                setNewStartServiceTimes(route, depot);
+            }
+        }
 
+    }
+
+
+    public static boolean recombination(ArrayList<Customer> customers, double distance){
+        for (int i = 0; i < customers.size(); i ++){
+            double newDistance = swap(i, customers, distance);
+            if (newDistance != -1 && newDistance < distance ){
+                distance = newDistance;
+                return true;
+            }
+        }
+        return false;
+    }
+    public static double swap(int i, ArrayList<Customer> customers, double distance){
+        ArrayList<Customer> copyCustomers = new ArrayList<>(customers);
+        for (int j = i; j < copyCustomers.size() - 1; j++){
+            Customer secondCust = copyCustomers.remove(j+1);
+            Customer firstCust = copyCustomers.remove(j);
+            copyCustomers.add(j, secondCust);
+            copyCustomers.add(j+1, firstCust);
+            double newDistance = LSValidator.validateDistance(copyCustomers, depot);
+            if (newDistance == -1 || newDistance > distance){
+                return swap(j+1, copyCustomers, distance);
+            } else if (newDistance < distance){
+                setValidCombination(copyCustomers);
+                return newDistance;
+            }
+        }
+        return -1;
     }
 
     public static void makeSwapByOne(Route firstRoute, Route secondRoute) {
@@ -81,6 +130,7 @@ public class LocalSearchAction {
                     if (newDistance < bestDistance) {
                         setBests(firstCustomersCopy, secondCustomersCopy);
                         bestDistance = newDistance;
+                        //return;
                         swapByOneCustomer(firstCustomersCopy, secondCustomersCopy, firstCar, secondCar);
 
                     } else {
