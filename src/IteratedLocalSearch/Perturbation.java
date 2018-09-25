@@ -44,12 +44,11 @@ public class Perturbation {
             move(newMinRoute, newMaxRoute);
         }
         //HARD PERTURBATION. NOT FOR WEAK PEOPLE
-        /*for (int i = 0; i <= 10; i++){
+        for (int i = 0; i <= 10; i++){
             int first = (int) (Math.random() * routes.size());
             int second = (int) (Math.random() * routes.size());
             Route firstRoute = routes.get(first);
             Route secondRoute = routes.get(second);
-            System.out.println(firstRoute.getListOfCustomers().size() + " " + secondRoute.getListOfCustomers().size());
             if (firstRoute.getId() != secondRoute.getId()){
                 if (RouteServices.countDistance(firstRoute.getListOfCustomers(), depot) > RouteServices.countDistance(secondRoute.getListOfCustomers(), depot)){
                     move(secondRoute, firstRoute);
@@ -63,7 +62,7 @@ public class Perturbation {
             if (secondRoute.getListOfCustomers().size() == 0){
                 routes.remove(secondRoute);
             }
-        }*/
+        }
 
 
     }

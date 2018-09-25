@@ -115,7 +115,7 @@ public class Main {
         LocalSearchAction.execute(routes, depot);
         double startDistance = RouteServices.totalDistance(routes, depot);
         ArrayList<Route> startRoutes = new ArrayList<>(routes);
-        for (int i = 1; i<100;i++) {
+        for (int i = 1; i<500;i++) {
             Perturbation.execute(routes, depot);
             LocalSearchAction.execute(routes, depot);
             double newDistance = RouteServices.totalDistance(routes, depot);

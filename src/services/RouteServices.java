@@ -17,6 +17,9 @@ public class RouteServices {
     }
 
     public static double countDistance(ArrayList<Customer> customers, Customer depot) {
+        if (customers.size() == 0){
+            return 0;
+        }
         double distance = 0;
         int size = customers.size();
         if (size > 0) {

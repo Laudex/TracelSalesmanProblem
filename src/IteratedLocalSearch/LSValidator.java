@@ -29,6 +29,9 @@ public class LSValidator {
     }
 
     public static double validateDistance(ArrayList<Customer> customers, Customer depot){
+        if(customers.size() == 0){
+            return 0;
+        }
         double distance = 0;
         int size = customers.size();
         try {
