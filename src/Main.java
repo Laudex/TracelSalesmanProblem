@@ -1,3 +1,4 @@
+import GuidedLocalSearch.GuidedLocalSearchAction;
 import IteratedLocalSearch.LSValidator;
 import IteratedLocalSearch.LocalSearchAction;
 import IteratedLocalSearch.Perturbation;
@@ -123,13 +124,13 @@ public class Main {
                 continue;
             } else {
                 startRoutes = new ArrayList<>(routes);
-                System.out.println("KEK");
                 startDistance = newDistance;
 
             }
         }
         printRoutes(startRoutes);
         System.out.println("Best Distance : " + startDistance);
+        //GuidedLocalSearchAction.execute(routes, customers, depot);
 
 
     }

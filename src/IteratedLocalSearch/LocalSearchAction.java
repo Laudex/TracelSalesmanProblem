@@ -5,6 +5,7 @@ import entities.Customer;
 import entities.Route;
 import services.RouteServices;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -30,6 +31,7 @@ public class LocalSearchAction {
     public static double getBestDistance() {
         return bestDistance;
     }
+
 
     public static void execute(ArrayList<Route> routes, Customer depotOut) {
         depot = depotOut;

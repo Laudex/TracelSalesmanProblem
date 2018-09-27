@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0ed3db2-ff27-4f5b-a87c-e2e38d34e4cf" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LSValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LSValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../travelSalesmanProblem/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../travelSalesmanProblem/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LocalSearchAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LocalSearchAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/Perturbation.java" beforeDir="false" afterPath="$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/Perturbation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../travelSalesmanProblem/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../travelSalesmanProblem/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../travelSalesmanProblem/src/services/RouteServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/../travelSalesmanProblem/src/services/RouteServices.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/../travelSalesmanProblem/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="124" column="54" lean-forward="true" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
+            <state relative-caret-position="273">
+              <caret line="122" column="45" lean-forward="true" selection-start-line="122" selection-start-column="45" selection-end-line="122" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -32,10 +32,35 @@
       <file leaf-file-name="Perturbation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/Perturbation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="50" column="51" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
+            <state relative-caret-position="130">
+              <caret line="97" column="63" lean-forward="true" selection-start-line="97" selection-start-column="63" selection-end-line="97" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GuidedLocalSearchAction.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/GuidedLocalSearch/GuidedLocalSearchAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="334">
+              <caret line="60" column="44" lean-forward="true" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Customer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/entities/Customer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
+              <folding>
+                <element signature="e#1683#1684#0" expanded="true" />
+                <element signature="e#1721#1722#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -57,35 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomerServices.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/services/CustomerServices.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="17" lean-forward="true" selection-start-column="17" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CarServices.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/services/CarServices.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="606">
-              <caret line="69" column="25" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LocalSearchAction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LocalSearchAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="125" selection-start-line="125" selection-end-line="125" />
+            <state relative-caret-position="-1292">
+              <caret line="76" column="57" lean-forward="true" selection-start-line="76" selection-start-column="57" selection-end-line="76" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#434#435#0" expanded="true" />
@@ -95,25 +96,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileServices.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/services/FileServices.java">
+      <file leaf-file-name="LocalSearch.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/GuidedLocalSearch/LocalSearch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-835">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+            <state relative-caret-position="253">
+              <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#397#398#0" expanded="true" />
-                <element signature="e#424#425#0" expanded="true" />
-                <element signature="e#576#577#0" expanded="true" />
-                <element signature="e#608#609#0" expanded="true" />
-                <element signature="e#312#313#0" expanded="true" />
-                <element signature="e#347#348#0" expanded="true" />
-                <element signature="e#407#408#0" expanded="true" />
-                <element signature="e#463#464#0" expanded="true" />
-                <element signature="e#502#503#0" expanded="true" />
-                <element signature="e#533#534#0" expanded="true" />
-                <element signature="e#585#586#0" expanded="true" />
-                <element signature="e#633#634#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,8 +111,8 @@
       <file leaf-file-name="LSValidator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LSValidator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
+            <state relative-caret-position="380">
+              <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#218#219#0" expanded="true" />
@@ -136,8 +125,8 @@
       <file leaf-file-name="RouteServices.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/services/RouteServices.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+            <state relative-caret-position="254">
+              <caret line="43" selection-start-line="43" selection-end-line="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -159,7 +148,9 @@
       <find>error</find>
       <find>kek</find>
       <find>tostr</find>
+      <find>.size()</find>
       <find>er</find>
+      <find>remove</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -177,11 +168,13 @@
         <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/services/FileServices.java" />
         <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/services/CustomerServices.java" />
         <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/services/CarServices.java" />
-        <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LocalSearchAction.java" />
         <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/services/RouteServices.java" />
         <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LSValidator.java" />
-        <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/Perturbation.java" />
+        <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LocalSearchAction.java" />
+        <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/GuidedLocalSearch/GuidedLocalSearchAction.java" />
+        <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/GuidedLocalSearch/LocalSearch.java" />
         <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/Main.java" />
+        <option value="$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/Perturbation.java" />
       </list>
     </option>
   </component>
@@ -223,6 +216,12 @@
               <item name="travelSalesmanProblem" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="travelSalesmanProblem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="travelSalesmanProblem" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GuidedLocalSearch" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="travelSalesmanProblem" type="b2602c69:ProjectViewProjectNode" />
@@ -327,12 +326,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1537344926983</updated>
-      <workItem from="1537344930215" duration="67090000" />
+      <workItem from="1537344930215" duration="92513000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67090000" />
+    <option name="totallyTimeSpent" value="92513000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="9" y="9" width="1918" height="1038" extended-state="0" />
@@ -383,12 +382,41 @@
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../travelSalesmanProblem/src/GuidedLocalSearch/LocalSearch.java</url>
+          <line>179</line>
+          <properties />
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../travelSalesmanProblem/src/GuidedLocalSearch/LocalSearch.java</url>
+          <line>161</line>
+          <properties />
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/Perturbation.java</url>
+          <line>97</line>
+          <properties />
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/Perturbation.java</url>
+          <line>116</line>
+          <properties />
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="55" />
+      <option name="time" value="74" />
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="routes.get(3)" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/NotValidRouteException.java">
@@ -408,80 +436,6 @@
           <folding>
             <element signature="e#94598#94599#0" expanded="true" />
             <element signature="e#94636#94637#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/entities/Customer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="50" column="18" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
-          <folding>
-            <element signature="e#746#747#0" expanded="true" />
-            <element signature="e#777#778#0" expanded="true" />
-            <element signature="e#822#823#0" expanded="true" />
-            <element signature="e#855#856#0" expanded="true" />
-            <element signature="e#993#994#0" expanded="true" />
-            <element signature="e#1031#1032#0" expanded="true" />
-            <element signature="e#1107#1108#0" expanded="true" />
-            <element signature="e#1161#1162#0" expanded="true" />
-            <element signature="e#643#644#0" expanded="true" />
-            <element signature="e#676#677#0" expanded="true" />
-            <element signature="e#709#710#0" expanded="true" />
-            <element signature="e#738#739#0" expanded="true" />
-            <element signature="e#771#772#0" expanded="true" />
-            <element signature="e#800#801#0" expanded="true" />
-            <element signature="e#830#831#0" expanded="true" />
-            <element signature="e#859#860#0" expanded="true" />
-            <element signature="e#892#893#0" expanded="true" />
-            <element signature="e#924#925#0" expanded="true" />
-            <element signature="e#958#959#0" expanded="true" />
-            <element signature="e#991#992#0" expanded="true" />
-            <element signature="e#1026#1027#0" expanded="true" />
-            <element signature="e#1060#1061#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/entities/Car.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
-          <folding>
-            <element signature="e#332#333#0" expanded="true" />
-            <element signature="e#363#364#0" expanded="true" />
-            <element signature="e#408#409#0" expanded="true" />
-            <element signature="e#448#449#0" expanded="true" />
-            <element signature="e#483#484#0" expanded="true" />
-            <element signature="e#514#515#0" expanded="true" />
-            <element signature="e#562#563#0" expanded="true" />
-            <element signature="e#602#603#0" expanded="true" />
-            <element signature="e#592#593#0" expanded="true" />
-            <element signature="e#627#628#0" expanded="true" />
-            <element signature="e#685#686#0" expanded="true" />
-            <element signature="e#733#734#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/services/FileServices.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-835">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#397#398#0" expanded="true" />
-            <element signature="e#424#425#0" expanded="true" />
-            <element signature="e#576#577#0" expanded="true" />
-            <element signature="e#608#609#0" expanded="true" />
-            <element signature="e#312#313#0" expanded="true" />
-            <element signature="e#347#348#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
-            <element signature="e#463#464#0" expanded="true" />
-            <element signature="e#502#503#0" expanded="true" />
-            <element signature="e#533#534#0" expanded="true" />
-            <element signature="e#585#586#0" expanded="true" />
-            <element signature="e#633#634#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -506,18 +460,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LocalSearchAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="125" selection-start-line="125" selection-end-line="125" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#434#435#0" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../Program Files/Java/jdk1.8.0_144/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -528,24 +470,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/services/RouteServices.java">
+    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/services/FileServices.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+        <state relative-caret-position="-274">
+          <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#397#398#0" expanded="true" />
+            <element signature="e#424#425#0" expanded="true" />
+            <element signature="e#576#577#0" expanded="true" />
+            <element signature="e#608#609#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#347#348#0" expanded="true" />
+            <element signature="e#407#408#0" expanded="true" />
+            <element signature="e#463#464#0" expanded="true" />
+            <element signature="e#502#503#0" expanded="true" />
+            <element signature="e#533#534#0" expanded="true" />
+            <element signature="e#585#586#0" expanded="true" />
+            <element signature="e#633#634#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LSValidator.java">
+    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/entities/Customer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
+        <state relative-caret-position="185">
+          <caret line="56" column="32" selection-start-line="56" selection-start-column="32" selection-end-line="56" selection-end-column="32" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#218#219#0" expanded="true" />
-            <element signature="e#265#266#0" expanded="true" />
+            <element signature="e#1683#1684#0" expanded="true" />
+            <element signature="e#1721#1722#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -564,10 +517,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/Perturbation.java">
+    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LocalSearchAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="50" column="51" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
+        <state relative-caret-position="-1292">
+          <caret line="76" column="57" lean-forward="true" selection-start-line="76" selection-start-column="57" selection-end-line="76" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#434#435#0" expanded="true" />
+            <element signature="e#469#470#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/LSValidator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#218#219#0" expanded="true" />
+            <element signature="e#265#266#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/services/RouteServices.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -576,8 +553,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="124" column="54" lean-forward="true" selection-start-line="124" selection-start-column="54" selection-end-line="124" selection-end-column="54" />
+        <state relative-caret-position="273">
+          <caret line="122" column="45" lean-forward="true" selection-start-line="122" selection-start-column="45" selection-end-line="122" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/entities/Car.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+          <folding>
+            <element signature="e#511#512#0" expanded="true" />
+            <element signature="e#551#552#0" expanded="true" />
+            <element signature="e#592#593#0" expanded="true" />
+            <element signature="e#627#628#0" expanded="true" />
+            <element signature="e#685#686#0" expanded="true" />
+            <element signature="e#733#734#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/IteratedLocalSearch/Perturbation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="97" column="63" lean-forward="true" selection-start-line="97" selection-start-column="63" selection-end-line="97" selection-end-column="63" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/GuidedLocalSearch/LocalSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../travelSalesmanProblem/src/GuidedLocalSearch/GuidedLocalSearchAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="60" column="44" lean-forward="true" selection-start-line="60" selection-start-column="44" selection-end-line="60" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

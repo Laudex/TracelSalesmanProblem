@@ -91,8 +91,50 @@ public class Perturbation {
     public static void move(Route min, Route max) {
         ArrayList<Customer> copyListOfCustomersMax = new ArrayList<>(max.getListOfCustomers());
         ArrayList<Customer> copyListOfCustomersMin = new ArrayList<>(min.getListOfCustomers());
+        if (copyListOfCustomersMax.size() == 0 && copyListOfCustomersMin.size() == 0){
+            return;
+        }
+        if (copyListOfCustomersMin.size() == 0){
+            for (Customer customer : max.getListOfCustomers()){
+                int j = copyListOfCustomersMax.indexOf(customer);
+                copyListOfCustomersMin.add(customer);
+                copyListOfCustomersMax.remove(customer);
+                if (isValid(max, copyListOfCustomersMax) && isValid(min, copyListOfCustomersMin)) {
+                    min.getCar().setDistance(RouteServices.countDistance(min.getListOfCustomers(), depot));
+                    max.getCar().setDistance(RouteServices.countDistance(max.getListOfCustomers(), depot));
+                    min.setFinishDepot(min.getCar().getDistance());
+                    max.setFinishDepot(max.getCar().getDistance());
+
+                    LocalSearchAction.setNewStartServiceTimes(min, depot);
+                    LocalSearchAction.setNewStartServiceTimes(max, depot);
+                    break;
+                } else {
+                    copyListOfCustomersMax.add(j, customer);
+                    copyListOfCustomersMin.remove(customer);
+                }
+            }
+        } else if (copyListOfCustomersMax.size() == 0){
+            for (Customer customer : min.getListOfCustomers()){
+                int j = copyListOfCustomersMin.indexOf(customer);
+                copyListOfCustomersMax.add(customer);
+                copyListOfCustomersMin.remove(customer);
+                if (isValid(max, copyListOfCustomersMax) && isValid(min, copyListOfCustomersMin)) {
+                    min.getCar().setDistance(RouteServices.countDistance(min.getListOfCustomers(), depot));
+                    max.getCar().setDistance(RouteServices.countDistance(max.getListOfCustomers(), depot));
+                    min.setFinishDepot(min.getCar().getDistance());
+                    max.setFinishDepot(max.getCar().getDistance());
+
+                    LocalSearchAction.setNewStartServiceTimes(min, depot);
+                    LocalSearchAction.setNewStartServiceTimes(max, depot);
+                    break;
+                } else {
+                    copyListOfCustomersMin.add(j, customer);
+                    copyListOfCustomersMax.remove(customer);
+                }
+            }
+        }
         for (Customer customer : max.getListOfCustomers()) {
-            for (int i = 0; i < min.getListOfCustomers().size(); i++) {
+            for (int i = 0; i <= min.getListOfCustomers().size(); i++) {
                 int j = copyListOfCustomersMax.indexOf(customer);
                 copyListOfCustomersMin.add(i, customer);
                 copyListOfCustomersMax.remove(customer);

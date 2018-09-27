@@ -1,0 +1,166 @@
+package GuidedLocalSearch;
+
+import IteratedLocalSearch.LocalSearchAction;
+import entities.Customer;
+import entities.Route;
+import services.RouteServices;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+
+public class GuidedLocalSearchAction {
+
+    private static Customer depot;
+    private static double lambda = 2;
+
+    //private
+
+    public static void execute(ArrayList<Route> routes, ArrayList<Customer> allCustomers, Customer depotOut) {
+        depot = depotOut;
+        double[][] featureCostMap = new double[allCustomers.size()][allCustomers.size()];
+        for (Customer firstCustomer : allCustomers) {
+            for (Customer secondCustomer : allCustomers) {
+                double distance = firstCustomer.getMappedDistances().get(secondCustomer.getCustomerId());
+                featureCostMap[firstCustomer.getCustomerId()][secondCustomer.getCustomerId()] = distance;
+            }
+        }
+        int[][] penaltyMap = new int[allCustomers.size()][allCustomers.size()];
+        for (int i = 0; i < allCustomers.size(); i++) {
+            for (int j = 0; j < allCustomers.size(); j++) {
+                penaltyMap[i][j] = 0;
+            }
+        }
+        int[][] featureIndicatorMap = new int[allCustomers.size()][allCustomers.size()];
+        for (int i = 0; i < allCustomers.size(); i++) {
+            for (int j = 0; j < allCustomers.size(); j++) {
+                featureIndicatorMap[i][j] = 0;
+            }
+        }
+        double[][] utilMap = new double[allCustomers.size()][allCustomers.size()];
+        for (int i = 0; i < allCustomers.size(); i++) {
+            for (int j = 0; j < allCustomers.size(); j++) {
+                utilMap[i][j] = 0;
+            }
+        }
+        double bestDistance = RouteServices.totalDistance(routes, depot);
+        ArrayList<Route> bestRoutes = new ArrayList<>(routes);
+        int k = 0;
+        while (k < 10000){
+
+
+           // double composition = getComposition(penaltyMap, featureIndicatorMap);
+
+            //double newDistance = RouteServices.totalDistance(routes, depot) + lambda * composition;
+            //System.out.println("New distance: " + newDistance);
+
+            LocalSearch.executeGLS(routes, depot, penaltyMap);
+            findIndicates(featureIndicatorMap, routes);
+            double newDistance = RouteServices.totalDistance(routes, depot);
+            System.out.println("New distance: " + newDistance);
+            if (newDistance < bestDistance){
+               // System.out.println("here");
+                bestDistance = newDistance;
+                bestRoutes = new ArrayList<>(routes);
+            }
+            findUtil(penaltyMap, featureCostMap, featureIndicatorMap, utilMap, routes);
+            k++;
+            /*for (int i = 0; i < 101; i++){
+                for (int j = 0; j < 101; j++){
+                    System.out.print(penaltyMap[i][j] + " ");
+                }
+                System.out.println();
+            }
+            System.out.println("============================");*/
+        }
+        printRoutes(bestRoutes);
+        System.out.println("Best: " + bestDistance);
+
+
+
+
+
+    }
+
+    public static void printRoutes(ArrayList<Route> routes) {
+        System.out.println("Size: " + routes.size());
+        for (Route route : routes) {
+            Iterator it = route.getCustomersAndStartServiceTime().entrySet().iterator();
+            System.out.print(route.getStartDepot() + " 0 ");
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+                Customer customer = (Customer) pair.getKey();
+                System.out.print(customer.getCustomerId() + " " + pair.getValue() + " ");
+            }
+            System.out.println("0 " + "Depot Finish :" + route.getFinishDepot());
+            System.out.println();
+        }
+    }
+
+    public static void findIndicates(int[][] featureIndicatorMap, ArrayList<Route> routes) {
+        for (int i = 0; i < featureIndicatorMap.length; i++) {
+            for (int j = 0; j < featureIndicatorMap.length; j++) {
+                featureIndicatorMap[i][j] = 0;
+            }
+        }
+        for (Route route : routes) {
+            ArrayList<Customer> customers = route.getListOfCustomers();
+            if (customers.size() > 1) {
+                Customer start = customers.get(0);
+                Customer last = customers.get(customers.size() - 1);
+                featureIndicatorMap[0][start.getCustomerId()] = 1;
+                featureIndicatorMap[0][last.getCustomerId()] = 1;
+                featureIndicatorMap[start.getCustomerId()][0] = 1;
+                featureIndicatorMap[last.getCustomerId()][0] = 1;
+                for (int i = 0; i < customers.size(); i++) {
+                    if (i + 1 < customers.size()) {
+                        Customer first = customers.get(i);
+                        Customer second = customers.get(i + 1);
+                        featureIndicatorMap[first.getCustomerId()][second.getCustomerId()] = 1;
+                        featureIndicatorMap[second.getCustomerId()][first.getCustomerId()] = 1;
+
+                    }
+                }
+            } else if (customers.size() == 1){
+                Customer customer = customers.get(0);
+                featureIndicatorMap[0][customer.getCustomerId()] = 1;
+                featureIndicatorMap[customer.getCustomerId()][0] = 1;
+            }
+        }
+    }
+
+    public static double getComposition(int[][] penaltyMap, int[][] featureIndicatorMap){
+        double composition = 0;
+        for (int i = 0; i < penaltyMap.length; i++){
+            for (int j = i + 1; j < penaltyMap.length; j++){
+                composition = composition + penaltyMap[i][j] * featureIndicatorMap[i][j];
+            }
+        }
+        return composition;
+    }
+    public static void findUtil(int[][] penaltyMap, double[][] featureCostMap, int[][] featureIndicatorMap, double[][] utilMap, ArrayList<Route> routes){
+        for (int i = 0; i < utilMap.length; i++) {
+            for (int j = 0; j < utilMap.length; j++) {
+                utilMap[i][j] = 0;
+            }
+        }
+        double maxUtil = 0;
+        int x = 0;
+        int y = 0;
+        findIndicates(featureIndicatorMap, routes);
+        for (int i = 0; i < utilMap.length; i++){
+            for (int j = i + 1; j < utilMap.length; j++){
+                utilMap[i][j] = featureIndicatorMap[i][j] * featureCostMap[i][j] / (1 + penaltyMap[i][j]);
+                if (utilMap[i][j] > maxUtil) {
+                    maxUtil = utilMap[i][j];
+                    x = i;
+                    y = j;
+                }
+            }
+        }
+        penaltyMap[x][y] ++;
+        penaltyMap[y][x] ++;
+    }
+
+
+}
