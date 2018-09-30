@@ -2,12 +2,12 @@ package services;
 
 import entities.Car;
 import entities.Customer;
+import entities.Route;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 public class FileServices {
 
@@ -38,6 +38,33 @@ public class FileServices {
 
     public static void setCapacity(int capacity) {
         FileServices.capacity = capacity;
+    }
+
+    public static void printToTxt(ArrayList<Route> routes, String filename){
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+            for (Route route : routes) {
+                int k = 0;
+                StringBuilder routeString = new StringBuilder();
+                Iterator it = route.getCustomersAndStartServiceTime().entrySet().iterator();
+                routeString.append("0 " + route.getStartDepot() + " ");
+                while (it.hasNext()) {
+                    k++;
+                    Map.Entry pair = (Map.Entry) it.next();
+                    Customer customer = (Customer) pair.getKey();
+                    routeString.append(customer.getCustomerId() + " " + pair.getValue() + " ");
+                }
+                routeString.append("0 " + route.getFinishDepot());
+                System.out.println(routeString.toString());
+                if (k > 0) {
+                    writer.write(routeString.toString());
+                    writer.write("\n");
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void readFromTxt(String filename) throws IOException {

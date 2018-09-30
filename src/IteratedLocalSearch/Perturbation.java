@@ -11,6 +11,24 @@ public class Perturbation {
     private static Customer depot;
 
     private static ArrayList<Customer> validCombination = new ArrayList<>();
+    private static ArrayList<Customer> validCombinationMin = new ArrayList<>();
+    private static ArrayList<Customer> validCombinationMax = new ArrayList<>();
+
+    public static ArrayList<Customer> getValidCombinationMin() {
+        return validCombinationMin;
+    }
+
+    public static void setValidCombinationMin(ArrayList<Customer> validCombinationMin) {
+        Perturbation.validCombinationMin = validCombinationMin;
+    }
+
+    public static ArrayList<Customer> getValidCombinationMax() {
+        return validCombinationMax;
+    }
+
+    public static void setValidCombinationMax(ArrayList<Customer> validCombinationMax) {
+        Perturbation.validCombinationMax = validCombinationMax;
+    }
 
     public static ArrayList<Customer> getValidCombination() {
         return validCombination;
@@ -29,21 +47,28 @@ public class Perturbation {
         ArrayList<Route> routesCopy = new ArrayList<>(routes);
         Route minRoute = findMinRoute(routes);
         Route maxRoute = findMaxRoute(routes);
-        //System.out.println("Max: " + maxRoute.getFinishDepot());
-        for (int i = 0; i < maxRoute.getListOfCustomers().size() / 2; i++) {
+
+        for (int i = 0; i < 5; i++) {
             move(minRoute, maxRoute);
         }
-      //  System.out.println(maxRoute.getListOfCustomers().toString());
+
+
         routes.remove(maxRoute);
         routes.remove(minRoute);
         Route newMinRoute = findMinRoute(routes);
         Route newMaxRoute = findMaxRoute(routes);
         routes.add(minRoute);
         routes.add(maxRoute);
-        for (int i = 0; i < newMaxRoute.getListOfCustomers().size(); i++) {
+
+        int check = newMinRoute.getListOfCustomers().size()  + newMaxRoute.getListOfCustomers().size();
+        for (int i = 0; i < 5; i++) {
+            ArrayList<Customer> copyMin = new ArrayList<>(newMinRoute.getListOfCustomers());
+            ArrayList<Customer> copyMax = new ArrayList<>(newMaxRoute.getListOfCustomers());
             move(newMinRoute, newMaxRoute);
+            if (newMinRoute.getListOfCustomers().size()  + newMaxRoute.getListOfCustomers().size() != check){
+            }
         }
-        //HARD PERTURBATION. NOT FOR WEAK PEOPLE
+
         for (int i = 0; i <= 10; i++){
             int first = (int) (Math.random() * routes.size());
             int second = (int) (Math.random() * routes.size());
@@ -99,7 +124,9 @@ public class Perturbation {
                 int j = copyListOfCustomersMax.indexOf(customer);
                 copyListOfCustomersMin.add(customer);
                 copyListOfCustomersMax.remove(customer);
-                if (isValid(max, copyListOfCustomersMax) && isValid(min, copyListOfCustomersMin)) {
+                if (isValid(max, copyListOfCustomersMax, 1) && isValid(min, copyListOfCustomersMin, 0)) {
+                    max.setListOfCustomers(getValidCombinationMax());
+                    min.setListOfCustomers(getValidCombinationMin());
                     min.getCar().setDistance(RouteServices.countDistance(min.getListOfCustomers(), depot));
                     max.getCar().setDistance(RouteServices.countDistance(max.getListOfCustomers(), depot));
                     min.setFinishDepot(min.getCar().getDistance());
@@ -118,7 +145,9 @@ public class Perturbation {
                 int j = copyListOfCustomersMin.indexOf(customer);
                 copyListOfCustomersMax.add(customer);
                 copyListOfCustomersMin.remove(customer);
-                if (isValid(max, copyListOfCustomersMax) && isValid(min, copyListOfCustomersMin)) {
+                if (isValid(max, copyListOfCustomersMax,1) && isValid(min, copyListOfCustomersMin,0)) {
+                    max.setListOfCustomers(getValidCombinationMax());
+                    min.setListOfCustomers(getValidCombinationMin());
                     min.getCar().setDistance(RouteServices.countDistance(min.getListOfCustomers(), depot));
                     max.getCar().setDistance(RouteServices.countDistance(max.getListOfCustomers(), depot));
                     min.setFinishDepot(min.getCar().getDistance());
@@ -138,7 +167,9 @@ public class Perturbation {
                 int j = copyListOfCustomersMax.indexOf(customer);
                 copyListOfCustomersMin.add(i, customer);
                 copyListOfCustomersMax.remove(customer);
-                if (isValid(max, copyListOfCustomersMax) && isValid(min, copyListOfCustomersMin)) {
+                if (isValid(max, copyListOfCustomersMax, 1) && isValid(min, copyListOfCustomersMin, 0)) {
+                    max.setListOfCustomers(getValidCombinationMax());
+                    min.setListOfCustomers(getValidCombinationMin());
                     min.getCar().setDistance(RouteServices.countDistance(min.getListOfCustomers(), depot));
                     max.getCar().setDistance(RouteServices.countDistance(max.getListOfCustomers(), depot));
                     min.setFinishDepot(min.getCar().getDistance());
@@ -156,21 +187,33 @@ public class Perturbation {
         }
     }
 
-    public static boolean isValid(Route route, ArrayList<Customer> customers) {
+    public static boolean isValid(Route route, ArrayList<Customer> customers, int indicator) {
         double distance = LSValidator.validateDistance(customers, depot);
         if (distance == -1) {
             if (recombination(customers)){
-                route.setListOfCustomers(getValidCombination());
+                if (indicator == 1){
+                    setValidCombinationMax(getValidCombination());
+                } else if (indicator == 0){
+                    setValidCombinationMin(getValidCombination());
+                }
                 return true;
             } else {
                 return false;
             }
         }
         if (recombination(customers, distance)){
-            route.setListOfCustomers(getValidCombination());
+            if (indicator == 1){
+                setValidCombinationMax(getValidCombination());
+            } else if (indicator == 0){
+                setValidCombinationMin(getValidCombination());
+            }
             return true;
         }
-        route.setListOfCustomers(customers);
+        if (indicator == 1){
+            setValidCombinationMax(customers);
+        } else if (indicator == 0){
+            setValidCombinationMin(customers);
+        }
         return true;
     }
     public static boolean recombination(ArrayList<Customer> customers){
@@ -201,7 +244,7 @@ public class Perturbation {
             copyCustomers.add(j, secondCust);
             copyCustomers.add(j+1, firstCust);
             double newDistance = LSValidator.validateDistance(copyCustomers, depot);
-            if (newDistance == -1 || newDistance > distance){
+            if (newDistance == -1 || newDistance >= distance){
                 return swap(j+1, copyCustomers, distance);
             } else if (newDistance < distance){
                 setValidCombination(copyCustomers);

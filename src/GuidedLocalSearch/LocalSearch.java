@@ -128,20 +128,14 @@ public class LocalSearch {
                 boolean isValid = LSValidator.validate(firstCustomersCopy, secondCustomersCopy, depot, firstCar, secondCar);
                 if (isValid) {
                     double newDistance = RouteServices.countDistance(firstCustomersCopy, depot) + RouteServices.countDistance(secondCustomersCopy, depot) + lambda * (getCompositionForRoute(firstCustomersCopy, penaltyMap) + getCompositionForRoute(secondCustomersCopy, penaltyMap));
-                    // System.out.println("New Distance:" + newDistance);
                     if (newDistance < bestDistance) {
                         setBests(firstCustomersCopy, secondCustomersCopy);
                         bestDistance = newDistance;
-                        //return;
                         swapByOneCustomer(firstCustomersCopy, secondCustomersCopy, firstCar, secondCar, penaltyMap);
 
                     } else {
-                        //   System.out.println("New Distance is not better!");
-                        //   System.out.println("New Distance: " + newDistance + " Best Distance: " + bestDistance);
                     }
-                    //System.out.println("good");
                 } else {
-                    //System.out.println("Bad");
                 }
                 firstCustomersCopy.remove(firstIndex);
                 secondCustomersCopy.remove(secondIndex);

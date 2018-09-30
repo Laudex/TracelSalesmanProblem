@@ -3,6 +3,7 @@ package GuidedLocalSearch;
 import IteratedLocalSearch.LocalSearchAction;
 import entities.Customer;
 import entities.Route;
+import services.FileServices;
 import services.RouteServices;
 
 import java.util.ArrayList;
@@ -14,9 +15,8 @@ public class GuidedLocalSearchAction {
     private static Customer depot;
     private static double lambda = 2;
 
-    //private
 
-    public static void execute(ArrayList<Route> routes, ArrayList<Customer> allCustomers, Customer depotOut) {
+    public static void execute(ArrayList<Route> routes, ArrayList<Customer> allCustomers, Customer depotOut, String filenameOut) {
         depot = depotOut;
         double[][] featureCostMap = new double[allCustomers.size()][allCustomers.size()];
         for (Customer firstCustomer : allCustomers) {
@@ -46,35 +46,18 @@ public class GuidedLocalSearchAction {
         double bestDistance = RouteServices.totalDistance(routes, depot);
         ArrayList<Route> bestRoutes = new ArrayList<>(routes);
         int k = 0;
-        while (k < 10000){
-
-
-           // double composition = getComposition(penaltyMap, featureIndicatorMap);
-
-            //double newDistance = RouteServices.totalDistance(routes, depot) + lambda * composition;
-            //System.out.println("New distance: " + newDistance);
-
+        while (k < 1000){
             LocalSearch.executeGLS(routes, depot, penaltyMap);
             findIndicates(featureIndicatorMap, routes);
             double newDistance = RouteServices.totalDistance(routes, depot);
-            System.out.println("New distance: " + newDistance);
             if (newDistance < bestDistance){
-               // System.out.println("here");
                 bestDistance = newDistance;
                 bestRoutes = new ArrayList<>(routes);
             }
             findUtil(penaltyMap, featureCostMap, featureIndicatorMap, utilMap, routes);
             k++;
-            /*for (int i = 0; i < 101; i++){
-                for (int j = 0; j < 101; j++){
-                    System.out.print(penaltyMap[i][j] + " ");
-                }
-                System.out.println();
-            }
-            System.out.println("============================");*/
         }
-        printRoutes(bestRoutes);
-        System.out.println("Best: " + bestDistance);
+        FileServices.printToTxt(bestRoutes, filenameOut);
 
 
 

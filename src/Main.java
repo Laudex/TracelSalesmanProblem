@@ -15,28 +15,13 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Car car1 = new Car(100, 0);
-        Car car2 = new Car(100, 0);
 
         ArrayList<Customer> customers = new ArrayList<>();
         ArrayList<Car> cars = new ArrayList<>();
-        // cars.add(car1);
-        //cars.add(car2);
-
-        //Customer depot = new Customer(0, 0, 0, 0, 0, 500, 0, true);
-        Customer customer2 = new Customer(1, 50, 45, 45, 71, 95, 10, false);
-        Customer customer3 = new Customer(2, 71, 27, 65, 154, 220, 50, false);
-        Customer customer4 = new Customer(3, 23, 85, 34, 314, 367, 23, false);
-
-        // car1.setCurrentState(depot);
-        // car2.setCurrentState(depot);
 
 
-        // customers.add(depot);
-        // customers.add(customer2);
-        // customers.add(customer3);
-        //  customers.add(customer4);
-        FileServices.readFromTxt("C:\\instances\\C108.txt");
+        String file = "RC207.txt";
+        FileServices.readFromTxt("C:\\instances\\" + file);
         cars = FileServices.getCars();
         customers = FileServices.getCustomers();
         Customer depot = customers.get(0);
@@ -84,8 +69,6 @@ public class Main {
             newRoute.setFinishDepot(car.getDistance());
             routes.add(newRoute);
             if (CustomerServices.allCustomersAreServed(customers)) {
-                System.out.println("HERE!!!");
-                //printRoutes(routes);
                 break;
             }
             routeId++;
@@ -100,23 +83,18 @@ public class Main {
             size = size + route.getListOfCustomers().size();
         }
 
-        // System.out.println("Distance of first solution: " + distance);
-
-
-
-
 
         for (Route route : routes) {
             sum = sum + route.getFinishDepot();
         }
 
         System.out.println("Distance of first solution: " + distance);
-        System.out.println("sum: " + sum);
-        System.out.println("Best Distance : " + RouteServices.totalDistance(routes, depot));
+
+        //Iterated Local Search
         LocalSearchAction.execute(routes, depot);
         double startDistance = RouteServices.totalDistance(routes, depot);
         ArrayList<Route> startRoutes = new ArrayList<>(routes);
-        for (int i = 1; i<500;i++) {
+        for (int i = 1; i< 100;i++) {
             Perturbation.execute(routes, depot);
             LocalSearchAction.execute(routes, depot);
             double newDistance = RouteServices.totalDistance(routes, depot);
@@ -128,16 +106,29 @@ public class Main {
 
             }
         }
-        printRoutes(startRoutes);
-        System.out.println("Best Distance : " + startDistance);
-        //GuidedLocalSearchAction.execute(routes, customers, depot);
+
+        String filenameOut = "C:\\instances\\" + file + "_sol.txt";
+        //WRITE for ILS
+       // FileServices.printToTxt(startRoutes, filenameOut);
+        GuidedLocalSearchAction.execute(routes, customers, depot, filenameOut);
+        System.out.println("Best Distance : " + RouteServices.totalDistance(routes, depot));
 
 
     }
 
+    public static void printSize(ArrayList<Route> routes){
+        int size = 0;
+        for (Route route : routes) {
+            size = size + route.getListOfCustomers().size();
+        }
+        System.out.println("Size of customers: "  + size);
+    }
+
     public static void printRoutes(ArrayList<Route> routes) {
         System.out.println("Size: " + routes.size());
+        int size = 0;
         for (Route route : routes) {
+            size = size + route.getListOfCustomers().size();
             Iterator it = route.getCustomersAndStartServiceTime().entrySet().iterator();
             System.out.print(route.getStartDepot() + " 0 ");
             while (it.hasNext()) {
@@ -148,5 +139,6 @@ public class Main {
             System.out.println("0 " + "Depot Finish :" + route.getFinishDepot());
             System.out.println();
         }
+        System.out.println("Size of customers: "  + size);
     }
 }
