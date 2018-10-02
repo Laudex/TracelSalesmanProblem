@@ -46,7 +46,7 @@ public class GuidedLocalSearchAction {
         double bestDistance = RouteServices.totalDistance(routes, depot);
         ArrayList<Route> bestRoutes = new ArrayList<>(routes);
         int k = 0;
-        while (k < 1000){
+        while (k < 500){
             LocalSearch.executeGLS(routes, depot, penaltyMap);
             findIndicates(featureIndicatorMap, routes);
             double newDistance = RouteServices.totalDistance(routes, depot);

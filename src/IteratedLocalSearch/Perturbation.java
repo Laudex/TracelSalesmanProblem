@@ -189,17 +189,21 @@ public class Perturbation {
 
     public static boolean isValid(Route route, ArrayList<Customer> customers, int indicator) {
         double distance = LSValidator.validateDistance(customers, depot);
-        if (distance == -1) {
-            if (recombination(customers)){
-                if (indicator == 1){
-                    setValidCombinationMax(getValidCombination());
-                } else if (indicator == 0){
-                    setValidCombinationMin(getValidCombination());
+        if (LSValidator.validateCapacity(customers, route.getCar())) {
+            if (distance == -1) {
+                if (recombination(customers)) {
+                    if (indicator == 1) {
+                        setValidCombinationMax(getValidCombination());
+                    } else if (indicator == 0) {
+                        setValidCombinationMin(getValidCombination());
+                    }
+                    return true;
+                } else {
+                    return false;
                 }
-                return true;
-            } else {
-                return false;
             }
+        } else {
+            return false;
         }
         if (recombination(customers, distance)){
             if (indicator == 1){

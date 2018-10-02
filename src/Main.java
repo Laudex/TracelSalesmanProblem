@@ -2,6 +2,7 @@ import GuidedLocalSearch.GuidedLocalSearchAction;
 import IteratedLocalSearch.LSValidator;
 import IteratedLocalSearch.LocalSearchAction;
 import IteratedLocalSearch.Perturbation;
+import IteratedLocalSearch.StartSolution;
 import entities.Car;
 import entities.Customer;
 import entities.Route;
@@ -20,7 +21,7 @@ public class Main {
         ArrayList<Car> cars = new ArrayList<>();
 
 
-        String file = "RC207.txt";
+        String file = "RC105.txt";
         FileServices.readFromTxt("C:\\instances\\" + file);
         cars = FileServices.getCars();
         customers = FileServices.getCustomers();
@@ -37,7 +38,13 @@ public class Main {
 
         ArrayList<Route> routes = new ArrayList<>();
 
-        int routeId = 1;
+
+        //Advanced start solution search
+        StartSolution.execute(routes, cars, customers, depot);
+
+        //Start solution greedy. Not working for RC105
+
+        /*int routeId = 1;
         for (Car car : cars) {
             int count = 0;
             Route newRoute = new Route(routeId, car, 0);
@@ -73,20 +80,9 @@ public class Main {
             }
             routeId++;
 
-        }
+        }*/
 
         double distance = RouteServices.totalDistance(routes, depot);
-        double sum = 0;
-        int size = 0;
-
-        for (Route route : routes) {
-            size = size + route.getListOfCustomers().size();
-        }
-
-
-        for (Route route : routes) {
-            sum = sum + route.getFinishDepot();
-        }
 
         System.out.println("Distance of first solution: " + distance);
 
@@ -94,7 +90,7 @@ public class Main {
         LocalSearchAction.execute(routes, depot);
         double startDistance = RouteServices.totalDistance(routes, depot);
         ArrayList<Route> startRoutes = new ArrayList<>(routes);
-        for (int i = 1; i< 100;i++) {
+        for (int i = 1; i< 1000;i++) {
             Perturbation.execute(routes, depot);
             LocalSearchAction.execute(routes, depot);
             double newDistance = RouteServices.totalDistance(routes, depot);
@@ -109,9 +105,12 @@ public class Main {
 
         String filenameOut = "C:\\instances\\" + file + "_sol.txt";
         //WRITE for ILS
-       // FileServices.printToTxt(startRoutes, filenameOut);
+        FileServices.printToTxt(startRoutes, filenameOut);
+
+        //Guided Local Search
         GuidedLocalSearchAction.execute(routes, customers, depot, filenameOut);
-        System.out.println("Best Distance : " + RouteServices.totalDistance(routes, depot));
+
+        printSize(routes);
 
 
     }
